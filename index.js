@@ -33,10 +33,27 @@ app.post("bulk-bvn-verify", (req, res) => {
 
 // Nuban Verification
 
+app.post("/nuban-verification", (req, res) => {
+    const nubanNumber = req.body.nubanNumber
+    const nubanBank = req.body.nubanBank
+
+    sdk.nubanVerify({nuban:nubanNumber, bank:nubanBank})
+        .then(({data}) => console.log(`Data: ${data}`))
+        .catch(err => console.error(`Something went wrong: ${err}`))
+})
+
 // Get identity by customer ID
 
+app.post("/get-by-customer-id", (req, res) => {
+    
+    const customerId = req.body.customerId
+    
+    sdk.getidentitybycustomer({customer: customerId})
+        .then(({data}) => console.log(`Data: ${data}`))
+        .catch(err => console.error(`Something went wrong: ${err}`))
+})
 
-// Get identity by record ID
+// Start server
 
 app.listen(3000, (err) => {
     if(!error) console.log("App running on port 3000")
