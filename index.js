@@ -41,7 +41,7 @@ app.post("/bulk-bvn-verify", (req, res) => {
         bvn: bnvList
     }
 
-    sdk.bulkBVNVerify(options)
+    identity.verify(options)
         .then(({data}) => {
             console.log(`Data: ${data}`)
             res.send(data)
@@ -60,7 +60,7 @@ app.post("/nuban-verification", (req, res) => {
         nubanBank: nubanBank
     }
 
-    sdk.nubanVerify(options)
+    identity.verify(options)
         .then(({data}) => {
             console.log(`Data: ${data}`)
             res.send(data)
@@ -75,10 +75,10 @@ app.post("/get-by-customer-id", (req, res) => {
     const customerId = req.body.customerId
 
     const options = {
-        customer: customerId
+        id: customerId
     }
     
-    sdk.getidentitybycustomer(options)
+    identity.get(options)
         .then(({data}) => {
             console.log(`Data: ${data}`)
             res.send(data)
